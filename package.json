@@ -1,5 +1,18 @@
 {
   "name": "jwt-client",
   "version": "0.0.1",
-  "main": "jwt-client.js"
+  "main": "jwt-client.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start"
+  },
+  "devDependencies": {
+    "karma": "^0.12.x",
+    "karma-chrome-launcher": "^0.1.x",
+    "karma-firefox-launcher": "^0.1.x",
+    "karma-ie-launcher": "^0.1.x",
+    "karma-jasmine": "^0.1.x",
+    "karma-opera-launcher": "^0.1.x",
+    "karma-phantomjs-launcher": "^0.1.x",
+    "karma-safari-launcher": "^0.1.x"
+  }
 }

@@ -27,7 +27,7 @@
   JWT.write = function write(value) {
     return JWT.encode64(JSON.stringify(value.header)) + '.' +
             JWT.encode64(JSON.stringify(value.claim)) + '.' +
-            value.signature;
+            (value.signature || '');
   };
 
   JWT.read = function read(token) {
@@ -35,44 +35,66 @@
     return {
       header: JSON.parse(JWT.decode64(parts[0])),
       claim: JSON.parse(JWT.decode64(parts[1])),
-      signature: parts[2]
+      signature: (parts[2] || '')
     };
   };
 
-  JWT.validate = function validate(value, issuer, audience) {
+  JWT.validateClaim = function validateClaim(claim, issuer, audience) {
     var now = Date.now();
-    return value &&
-      (!value.exp || value.exp < now) &&
-      (!value.nbf || value.nbf > now) &&
-      (issuer === undefined || issuer === value.iss) &&
-      (audience === undefined || audience === value.aud);
+    return claim &&
+      (!claim.exp || claim.exp > now) &&
+      (!claim.nbf || claim.nbf < now) &&
+      (issuer === undefined || issuer === claim.iss) &&
+      (audience === undefined || audience === claim.aud);
+  };
+
+  JWT.validate = function validate(value, issuer, audience) {
+    return value && value.claim && JWT.validateClaim(value.claim, issuer, audience);
   };
 
   JWT.set = function set(token, key, storage) {
-    key = key || JWT.defaults.key;
-    storage = storage || JWT.defaults.storage;
-    return storage.setItem(key, token);
+    var normalized = normalize(key, storage);
+    return normalized.storage.setItem(normalized.key, token);
   };
 
   JWT.get = function get(key, storage) {
-    key = key || JWT.defaults.key;
-    storage = storage || JWT.defaults.storage;
-    return storage.getItem(key);
+    var normalized = normalize(key, storage);
+    return normalized.storage.getItem(normalized.key);
+  };
+
+  JWT.remove = function forget(key, storage) {
+    var normalized = normalize(key, storage);
+    return normalized.storage.removeItem(normalized.key);
   };
 
   JWT.keep = function keep(value, key, storage) {
-    return JWT.set(JWT.write(value.header, value.claim, value.signature), key, storage);
+    return JWT.set(JWT.write(value), key, storage);
   };
 
   JWT.remember = function remember(key, storage) {
-    return JWT.read(JWT.get(key, storage));
+    var memory = JWT.get(key, storage);
+    return memory && JWT.read(memory);
   };
 
-  JWT.forget = function forget(key, storage) {
-    key = key || JWT.defaults.key;
-    storage = storage || JWT.defaults.storage;
-    return storage.removeItem(key);
-  };
+  JWT.forget = JWT.remove;
+
+  // Private functions
+  // Just a little bit copy/pasted from Lodash
+  function isString(value) {
+    return typeof value == 'string' ||
+      (value && typeof value == 'object' && toString.call(value) == '[object String]') || false;
+  }
+
+  function normalize(key, storage) {
+    if (key && !isString(key)) {
+      storage = key;
+      key = undefined;
+    }
+    return {
+      key: key || JWT.defaults.key,
+      storage: storage || JWT.defaults.storage
+    };
+  }
 
   return JWT;
 });

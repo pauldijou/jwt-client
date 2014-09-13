@@ -38,4 +38,11 @@ request.setHeader('Authorization', JWT.get());
 
 ## API
 
+## Test
+
+~~~ shell
+npm install
+npm test
+~~~
+
 ## License
