@@ -1,0 +1,5 @@
+{
+  "name": "jwt-client",
+  "version": "0.0.1",
+  "main": "jwt-client.js"
+}
