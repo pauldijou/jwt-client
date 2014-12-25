@@ -18,7 +18,7 @@ describe('Storage', function () {
   var claim = { "sub": 1234567890, "name": "John Doe", "admin": true };
   var signature = 'eoaDVGTClRdfxUZXiPs3f8FmJDkDE_VCQFXqKxpLsts';
   var value = { header: header, claim: claim, signature: signature };
-  var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMzQ1Njc4OTAsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ==.eoaDVGTClRdfxUZXiPs3f8FmJDkDE_VCQFXqKxpLsts';
+  var token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMzQ1Njc4OTAsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ==.eoaDVGTClRdfxUZXiPs3f8FmJDkDE_VCQFXqKxpLsts';
 
   var runDefaultTests = function () {
     it('should store a token', function () {

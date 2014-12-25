@@ -13,6 +13,7 @@
 
   JWT.defaults = {
     key: 'JWT_TOKEN',
+    tokenPrefix: 'Bearer ',
     storage: global.localStorage
   };
 
@@ -25,13 +26,18 @@
   };
 
   JWT.write = function write(value) {
-    return JWT.encode64(JSON.stringify(value.header)) + '.' +
+    return JWT.defaults.tokenPrefix +
+            JWT.encode64(JSON.stringify(value.header)) + '.' +
             JWT.encode64(JSON.stringify(value.claim)) + '.' +
             (value.signature || '');
   };
 
-  JWT.read = function read(token) {
-    var parts = token.split('.');
+  JWT.read = function read(header) {
+    if (header.indexOf(JWT.defaults.tokenPrefix) === 0) {
+      header = header.substring(JWT.defaults.tokenPrefix.length);
+    }
+
+    var parts = header.split('.');
     return {
       header: JSON.parse(JWT.decode64(parts[0])),
       claim: JSON.parse(JWT.decode64(parts[1])),
@@ -52,9 +58,9 @@
     return value && value.claim && JWT.validateClaim(value.claim, issuer, audience);
   };
 
-  JWT.set = function set(token, key, storage) {
+  JWT.set = function set(value, key, storage) {
     var normalized = normalize(key, storage);
-    return normalized.storage.setItem(normalized.key, token);
+    return normalized.storage.setItem(normalized.key, value);
   };
 
   JWT.get = function get(key, storage) {
