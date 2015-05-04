@@ -1,0 +1,27 @@
+{
+  "name": "jwt-client",
+  "main": "jwt-client.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/pauldijou/jwt-client",
+  "authors": [
+    "Paul Dijou <paul.dijou@gmail.com> (http://pauldijou.fr)"
+  ],
+  "description": "Micro service to read, write and save JWT headers",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "jwt"
+  ],
+  "license": "Apache 2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "karma-conf.js"
+  ]
+}
