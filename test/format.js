@@ -1,20 +1,20 @@
 describe('Format', function () {
   var values = [{
     raw: 'a',
-    enc: 'YQ=='
+    enc: 'YQ'
   }, {
     raw: '{"iss":"me","exp":1234579789,"id":"totoro"}',
-    enc: 'eyJpc3MiOiJtZSIsImV4cCI6MTIzNDU3OTc4OSwiaWQiOiJ0b3Rvcm8ifQ=='
+    enc: 'eyJpc3MiOiJtZSIsImV4cCI6MTIzNDU3OTc4OSwiaWQiOiJ0b3Rvcm8ifQ'
   },{
     raw: '{ "msg_en": "Hello", "msg_jp": "こんにちは", "msg_cn": "你好", "msg_kr": "안녕하세요", "msg_ru": "Здравствуйте!", "msg_de": "Grüß Gott" }',
-    enc: 'eyAibXNnX2VuIjogIkhlbGxvIiwgIm1zZ19qcCI6ICLjgZPjgpPjgavjgaHjga8iLCAibXNnX2NuIjogIuS9oOWlvSIsICJtc2dfa3IiOiAi7JWI64WV7ZWY7IS47JqUIiwgIm1zZ19ydSI6ICLQl9C00YDQsNCy0YHRgtCy0YPQudGC0LUhIiwgIm1zZ19kZSI6ICJHcsO8w58gR290dCIgfQ=='
+    enc: 'eyAibXNnX2VuIjogIkhlbGxvIiwgIm1zZ19qcCI6ICLjgZPjgpPjgavjgaHjga8iLCAibXNnX2NuIjogIuS9oOWlvSIsICJtc2dfa3IiOiAi7JWI64WV7ZWY7IS47JqUIiwgIm1zZ19ydSI6ICLQl9C00YDQsNCy0YHRgtCy0YPQudGC0LUhIiwgIm1zZ19kZSI6ICJHcsO8w58gR290dCIgfQ'
   }];
 
   var header = {"alg": "HS256", "typ": "JWT" };
   var claim = { "sub": 1234567890, "name": "John Doe", "admin": true };
   var signature = 'eoaDVGTClRdfxUZXiPs3f8FmJDkDE_VCQFXqKxpLsts';
   var value = { header: header, claim: claim, signature: signature };
-  var token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMzQ1Njc4OTAsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ==.eoaDVGTClRdfxUZXiPs3f8FmJDkDE_VCQFXqKxpLsts';
+  var token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMzQ1Njc4OTAsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ.eoaDVGTClRdfxUZXiPs3f8FmJDkDE_VCQFXqKxpLsts';
 
   it('should encode raw string to base64 ones', function () {
     values.forEach(function (value) {

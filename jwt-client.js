@@ -12,13 +12,21 @@
   var JWT = {};
 
   JWT.defaults = {
+    // The key used to store the token
     key: 'JWT_TOKEN',
+    // This is the official token to use for JWT but feel free to use another one if you want
     tokenPrefix: 'Bearer ',
-    storage: global.localStorage
+    // Where to store the token, by default localStorage
+    storage: global.localStorage,
+    // In Base64 url-safe mode, padding isn't mandatory, so we will disable it by default
+    // but you can force it by setting this param to true if you want
+    padding: false
   };
 
   JWT.encode64 = function encode64(value) {
-    return global.btoa(global.unescape(global.encodeURIComponent(value)));
+    var encoded = global.btoa(global.unescape(global.encodeURIComponent(value)));
+    if (!JWT.defaults.padding) { return encoded.replace(/=+$/, ''); }
+    else { return encoded; }
   };
 
   JWT.decode64 = function decode64(value) {
@@ -55,6 +63,7 @@
   };
 
   JWT.validate = function validate(value, issuer, audience) {
+    if (isString(value)) { value = JWT.read(value); }
     return value && value.claim && JWT.validateClaim(value.claim, issuer, audience);
   };
 
@@ -74,7 +83,7 @@
   };
 
   JWT.keep = function keep(value, key, storage) {
-    return JWT.set(JWT.write(value), key, storage);
+    return JWT.set(isString(value) ? value : JWT.write(value), key, storage);
   };
 
   JWT.remember = function remember(key, storage) {
