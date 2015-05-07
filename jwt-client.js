@@ -54,7 +54,7 @@
   };
 
   JWT.validateClaim = function validateClaim(claim, issuer, audience) {
-    var now = Date.now();
+    var now = Date.now() / 1000;
     return claim &&
       (!claim.exp || claim.exp > now) &&
       (!claim.nbf || claim.nbf < now) &&

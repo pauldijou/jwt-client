@@ -42,12 +42,12 @@ describe('Format', function () {
     });
 
     it('should detect an expired JWT object', function () {
-      var expiredValue = {exp: Date.now() - 5000};
+      var expiredValue = {exp: Date.now() / 1000 - 5};
       expect(JWT.validateClaim(expiredValue)).toEqual(false);
     });
 
     it('should detect a JWT object that is not started yet', function () {
-      var tooEarlyValue = {nbf: Date.now() + 5000};
+      var tooEarlyValue = {nbf: Date.now() / 1000 + 5};
       expect(JWT.validateClaim(tooEarlyValue)).toEqual(false);
     });
 
@@ -68,12 +68,12 @@ describe('Format', function () {
     });
 
     it('should detect an expired JWT object', function () {
-      var expiredValue = { header: header, claim: {exp: Date.now() - 5000}, signature: signature };
+      var expiredValue = { header: header, claim: {exp: Date.now() / 1000 - 5}, signature: signature };
       expect(JWT.validate(expiredValue)).toEqual(false);
     });
 
     it('should detect a JWT object that is not started yet', function () {
-      var tooEarlyValue = { header: header, claim: {nbf: Date.now() + 5000}, signature: signature };
+      var tooEarlyValue = { header: header, claim: {nbf: Date.now() / 1000 + 5}, signature: signature };
       expect(JWT.validate(tooEarlyValue)).toEqual(false);
     });
 
