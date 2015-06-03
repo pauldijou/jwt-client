@@ -1,4 +1,4 @@
-# JWT Reader
+# JWT Client
 
 ## Install
 
