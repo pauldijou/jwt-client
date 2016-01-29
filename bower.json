@@ -1,7 +1,7 @@
 {
   "name": "jwt-client",
   "main": "jwt-client.js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/pauldijou/jwt-client",
   "authors": [
     "Paul Dijou <paul.dijou@gmail.com> (http://pauldijou.fr)"
