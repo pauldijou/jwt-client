@@ -1,14 +1,16 @@
-(function (factory) {
+(function (glob, factory) {
   if (typeof exports === 'object') {
-    module.exports = factory(global);
+    module.exports = factory(glob);
   }
   else if (typeof define === 'function' && define.amd) {
-    define(['global'], factory);
+    define([], function () {
+      return factory(glob);
+    });
   }
   else {
-    window.JWT = factory(window);
+    window.JWT = factory(glob);
   }
-})(function (global) {
+})(this, function (global) {
   var JWT = {};
 
   JWT.defaults = {

@@ -30,6 +30,7 @@
     "karma-jasmine": "^0.1.x",
     "karma-opera-launcher": "^0.1.x",
     "karma-phantomjs-launcher": "^0.1.x",
-    "karma-safari-launcher": "^0.1.x"
+    "karma-safari-launcher": "^0.1.x",
+    "requirejs": "^2.1.22"
   }
 }
