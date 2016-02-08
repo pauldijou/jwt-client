@@ -1,16 +1,16 @@
-(function (glob, factory) {
+(function (global_, factory) {
   if (typeof exports === 'object') {
-    module.exports = factory(glob);
+    module.exports = factory;
   }
   else if (typeof define === 'function' && define.amd) {
     define([], function () {
-      return factory(glob);
+      return factory(global_);
     });
   }
   else {
-    window.JWT = factory(glob);
+    window.JWT = factory(global_);
   }
-})(this, function (global) {
+})(this, function (_global) {
   var JWT = {};
 
   JWT.defaults = {
@@ -19,20 +19,20 @@
     // This is the official token to use for JWT but feel free to use another one if you want
     tokenPrefix: 'Bearer ',
     // Where to store the token, by default localStorage
-    storage: global.localStorage,
+    storage: _global.localStorage,
     // In Base64 url-safe mode, padding isn't mandatory, so we will disable it by default
     // but you can force it by setting this param to true if you want
     padding: false
   };
 
   JWT.encode64 = function encode64(value) {
-    var encoded = global.btoa(global.unescape(global.encodeURIComponent(value)));
+    var encoded = _global.btoa(_global.unescape(_global.encodeURIComponent(value)));
     if (!JWT.defaults.padding) { return encoded.replace(/=+$/, ''); }
     else { return encoded; }
   };
 
   JWT.decode64 = function decode64(value) {
-    return global.decodeURIComponent(global.escape(global.atob(value)));
+    return _global.decodeURIComponent(_global.escape(_global.atob(value)));
   };
 
   JWT.write = function write(value) {

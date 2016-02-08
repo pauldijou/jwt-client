@@ -1,7 +1,7 @@
 {
   "name": "jwt-client",
   "description": "Micro service to read, write and save JWT headers",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "Paul Dijou <paul.dijou@gmail.com> (http://pauldijou.fr)",
   "license": "Apache 2",
   "homepage": "https://github.com/pauldijou/jwt-client",
@@ -15,12 +15,16 @@
   "keywords": [
     "jwt"
   ],
-  "main": "jwt-client.js",
+  "main": "node.js",
+  "browser": "browser.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start"
+    "test": "./node_modules/karma/bin/karma start",
+    "node": "node ./test/node/main.js",
+    "browserify": "browserify ./test/browserify/main.js -o ./test/browserify/main.bundle.js",
+    "webpack": "webpack ./test/webpack/main.js ./test/webpack/main.bundle.js"
   },
   "devDependencies": {
     "karma": "^0.12.x",
@@ -31,6 +35,7 @@
     "karma-opera-launcher": "^0.1.x",
     "karma-phantomjs-launcher": "^0.1.x",
     "karma-safari-launcher": "^0.1.x",
-    "requirejs": "^2.1.22"
+    "requirejs": "^2.1.22",
+    "webpack": "^1.12.13"
   }
 }
