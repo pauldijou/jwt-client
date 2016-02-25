@@ -99,7 +99,7 @@
   // Just a little bit copy/pasted from Lodash
   function isString(value) {
     return typeof value == 'string' ||
-      (value && typeof value == 'object' && toString.call(value) == '[object String]') || false;
+      (value && typeof value == 'object' && Object.prototype.toString.call(value) == '[object String]') || false;
   }
 
   function normalize(key, storage) {

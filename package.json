@@ -1,7 +1,7 @@
 {
   "name": "jwt-client",
   "description": "Micro service to read, write and save JWT headers",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Paul Dijou <paul.dijou@gmail.com> (http://pauldijou.fr)",
   "license": "Apache 2",
   "homepage": "https://github.com/pauldijou/jwt-client",
