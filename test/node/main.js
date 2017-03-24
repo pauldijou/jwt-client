@@ -1,2 +1,3 @@
 var JWT = require('../../');
-// Should throw
+
+console.log(JWT);
